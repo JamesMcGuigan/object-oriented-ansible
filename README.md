@@ -1,2 +1,7 @@
-# object-oriented-ansible
-Object Oriented Ansible Framework
+# Object Oriented Ansible Framework
+
+## Test Connection
+```
+ansible -m ping  all
+ansible -m setup all
+```
