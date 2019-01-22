@@ -1,0 +1,5 @@
+---
+- block:
+  - command: "service {{ package_service_name }} start"
+    become:  true
+  when: package_service_name is defined

@@ -1,0 +1,4 @@
+---
+- include_tasks: 0_python.yml
+- include_tasks: 1_user_sudo.yml
+- include_tasks: 2_repos.yml

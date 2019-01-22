@@ -1,0 +1,5 @@
+---
+- import_role:
+    name: "geerlingguy.repo-epel"
+  become: true
+  when: ansible_pkg_mgr == "yum"

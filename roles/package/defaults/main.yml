@@ -1,0 +1,13 @@
+---
+# Injected Variables
+lifecycle: "install"
+
+# Implicit Variables
+package_pkg_name: #[ansible_pkg_mgr]
+  apt: "{{ role_class }}"
+  yum: "{{ role_class }}"
+
+package_states:
+  "install":   "present"
+  "uninstall": "absent"
+package_state: "{{ package_states[lifecycle] | default('present') }}"

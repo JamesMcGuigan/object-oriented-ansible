@@ -1,0 +1,3 @@
+---
+- import_playbook: dependencies.yml
+- import_playbook: websites.yml

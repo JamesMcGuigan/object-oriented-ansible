@@ -1,0 +1,6 @@
+---
+- name:   package install
+  become: true
+  package:
+    name:   "{{ package_pkg_name[ansible_pkg_mgr] }}"
+    state:  present

@@ -1,0 +1,3 @@
+---
+- name: install python for ansible
+  raw:  "test -e /usr/bin/python || ({{ansible_pkg_mgr}} -y update && {{ansible_pkg_mgr}} install -y python)"

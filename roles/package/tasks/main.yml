@@ -1,0 +1,28 @@
+---
+- import_tasks: 0_vars.yml
+
+- name: 'Check role variables are defined'
+  assert:
+    that:
+      - role_class   is defined
+      - lifecycle    is in [ "install", "uninstall", "start", "stop", "restart" ]
+
+
+- import_tasks: 1_repo.yml
+- import_tasks: 1_update.yml
+- import_tasks: 2_pre_tasks.yml
+
+- import_tasks: 6_stop.yml
+  when: lifecycle is in [ "uninstall", "stop" ]
+
+- import_tasks: 3_package.yml
+- import_tasks: 4_autoremove.yml
+- import_tasks: 5_templates.yml
+
+- import_tasks: 6_start.yml
+  when: lifecycle is in [ "install", "start" ]
+
+- import_tasks: 6_restart.yml
+  when: lifecycle is in [ "restart" ]
+
+- import_tasks: 9_post_tasks.yml

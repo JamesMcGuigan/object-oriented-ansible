@@ -1,0 +1,5 @@
+---
+- hosts: all
+  # remote_user: root  # this doesn't override inventory file ansible_user= ; use "ansible_ssh_user: root" on roles
+  roles:
+    - { role: "bootstrap", ansible_ssh_user: root }

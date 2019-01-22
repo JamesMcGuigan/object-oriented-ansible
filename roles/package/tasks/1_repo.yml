@@ -1,0 +1,39 @@
+#---
+#- debug: var=ansible_pkg_mgr
+#- block:
+#  - name: yum install repository (and clean up left-over metadata)
+#    yum_repository:
+#      name:    package_repo[ansible_pkg_mgr]
+#      baseurl: https://download.fedoraproject.org/pub/epel/$ansible_distribution_major_version/$ansible_architecture/
+#      state:   present
+#    become:   true
+#
+#  - name:    yum-clean-metadata
+#    command: yum clean metadata
+#    args:
+#      warn: no
+#    notify: yum-clean-metadata
+#    become: true
+#
+#  when: ansible_pkg_mgr == "yum"
+#    and package_repo[ansible_pkg_mgr] != false
+#
+#
+#
+#- block:
+#  - name: apt-autoclean
+#    command: apt autoclean
+#    args:
+#      warn: no
+#    become: true
+#
+#  - name: apt install repository (and clean up left-over metadata)
+#    apt_repository:
+#      name: package_repo[ansible_pkg_mgr]
+#      state: present
+#    notify: apt-autoclean
+#    become: true
+#
+#  when: ansible_pkg_mgr == "apt"
+#    and package_repo[ansible_pkg_mgr] != false
+#
