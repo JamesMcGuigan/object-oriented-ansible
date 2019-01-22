@@ -5,5 +5,4 @@ package_pkg_name: #[ansible_pkg_mgr]
   apt: "nginx-full"
   yum: "nginx"
 
-package_templates: /etc/nginx/
-
+package_template_dir: /etc/nginx/

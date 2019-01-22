@@ -1,0 +1,5 @@
+---
+- import_tasks: "{{ item }}"
+  with_first_found:
+  - "{{ role_class }}/{{ file }}.yml"
+  - "{{ file }}.yml"

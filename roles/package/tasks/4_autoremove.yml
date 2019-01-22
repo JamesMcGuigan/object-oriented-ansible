@@ -1,16 +1,6 @@
 ---
-- block:
-  - name:    yum autoremove
-    command: yum autoremove
-    become:  true
-    args:
-      warn: false
-  when: ansible_pkg_mgr == 'yum'
-
-- block:
-  - name:    apt autoremove
-    command: apt autoremove
-    become:  true
-    args:
-      warn: false
-  when: ansible_pkg_mgr == 'apt'
+- name:    package autoremove
+  command: "{{ ansible_pkg_mgr }} autoremove"
+  become:  true
+  args:
+    warn: false

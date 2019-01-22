@@ -1,0 +1,8 @@
+---
+package_service_name: {{ package_service_name }}
+
+package_pkg_name: #[ansible_pkg_mgr]
+  apt: {{ package_pkg_name.apt }}
+  yum: {{ package_pkg_name.yum }}
+
+package_template_dir: {{ package_template_dir }}

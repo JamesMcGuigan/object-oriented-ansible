@@ -1,1 +1,42 @@
 ---
+- debug: var=package_template_dir
+- debug:
+    var: "{{ item }}"
+  with_filetree:
+    - "{{ role_path }}/templates/{{ role_class }}"
+
+- file:
+    path:  "{{ package_template_dir }}/{{ item.path }}"
+    state: directory
+  become: true
+  with_filetree:
+    - "{{ role_path }}/templates/{{ role_class }}"
+  when: item.state == 'directory'
+
+- copy:
+    src:  "{{ item.src }}"
+    dest: "{{ package_template_dir }}/{{ item.path }}"
+  become: true
+  with_filetree:
+    - "{{ role_path }}/templates/{{ role_class }}"
+  when: item.state == 'file'
+    and not item.path | regex_search('\\.j2$')
+
+- template:
+    src:  "{{ item.src }}"
+    dest: "{{ package_template_dir }}/{{ item.path | regex_replace('\\.j2$', '') }}"
+  become: true
+  with_filetree:
+    - "{{ role_path }}/templates/{{ role_class }}"
+  when: item.state == 'file'
+    and item.path | regex_search('\\.j2$')
+
+- file:
+    path:  "{{ package_template_dir }}/{{ item.path | regex_replace('\\.j2$', '') }}"
+    state: file
+    mode:  "a+x"
+  become: true
+  with_filetree:
+    - "{{ role_path }}/templates/{{ role_class }}"
+  when: item.state == 'file'
+    and item.path | regex_search('\\.sh(\\.j2)?$')
