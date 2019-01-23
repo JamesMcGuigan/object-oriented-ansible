@@ -2,7 +2,7 @@
 - debug:
     msg: "role : package : {{ role_class }} : {{ lifecycle }}"
 
-- import_tasks: file=0_vars.yml
+- include_tasks: 0_file.yml file=0_vars.yml
 
 - name: 'Check role variables are defined'
   assert:
@@ -11,21 +11,21 @@
       - lifecycle    in [ "install", "uninstall", "start", "stop", "restart" ]
 
 
-- import_tasks: file=1_repo.yml
-- import_tasks: file=1_update.yml
-- import_tasks: file=2_pre_tasks.yml
+- include_tasks: 0_file.yml file=1_repo.yml
+- include_tasks: 0_file.yml file=1_update.yml
+- include_tasks: 0_file.yml file=2_pre_tasks.yml
 
-- import_tasks: file=6_stop.yml
+- include_tasks: 0_file.yml file=6_stop.yml
   when: lifecycle in [ "uninstall", "stop" ]
 
-- import_tasks: file=3_package.yml
-- import_tasks: file=4_autoremove.yml
-- import_tasks: file=5_templates.yml
+- include_tasks: 0_file.yml file=3_package.yml
+- include_tasks: 0_file.yml file=4_autoremove.yml
+- include_tasks: 0_file.yml file=5_templates.yml
 
-- import_tasks: file=6_start.yml
+- include_tasks: 0_file.yml file=6_start.yml
   when: lifecycle in [ "install", "start" ]
 
-- import_tasks: file=6_restart.yml
+- include_tasks: 0_file.yml file=6_restart.yml
   when: lifecycle in [ "restart" ]
 
-- import_tasks: file=9_post_tasks.yml
+- include_tasks: 0_file.yml file=9_post_tasks.yml

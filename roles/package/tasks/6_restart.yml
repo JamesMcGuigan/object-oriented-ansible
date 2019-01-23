@@ -1,10 +1,13 @@
 ---
 - block:
-  - command: "service {{ package_service_name }} stop"
+  - name: "{{ role_class }} : {{ lifecycle }} : stop service"
+    service:
+      name:  "{{ package_service_name }}"
+      state: restarted
     become:  true
   when: package_service_name is defined
 
 - block:
-  - import_tasks: 6_stop.yml
-  - import_tasks: 6_start.yml
+  - include_tasks: 0_file.yml file=6_stop.yml
+  - include_tasks: 0_file.yml file=6_start.yml
   when: package_service_name is not defined

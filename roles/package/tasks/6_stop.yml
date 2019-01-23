@@ -1,5 +1,7 @@
 ---
-- block:
-  - command: "service {{ package_service_name }} stop"
-    become:  true
+- name: "{{ role_class }} : {{ lifecycle }} : stop service"
+  service:
+    name:  "{{ package_service_name }}"
+    state: started
+  become:  true
   when: package_service_name is defined

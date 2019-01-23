@@ -1,5 +1,7 @@
 ---
-- import_tasks: "{{ item }}"
+- include_tasks: "{{ task_file }}"
+  loop_control:
+    loop_var: task_file
   with_first_found:
-  - "{{ role_class }}/{{ file }}.yml"
-  - "{{ file }}.yml"
+    - "{{ role_class }}/{{ file }}"
+    - "{{ file }}"

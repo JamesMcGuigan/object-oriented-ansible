@@ -1,6 +1,8 @@
 ---
 - include_vars:
-    file: "{{ item }}"
+    file: "{{ var_file }}"
+  loop_control:
+    loop_var: var_file
   with_fileglob:
     - "{{ role_path }}/vars/{{ role_class }}.yml"
     - "{{ role_path }}/vars/{{ role_class }}/*.yml"
