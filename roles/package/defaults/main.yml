@@ -11,3 +11,5 @@ package_states:
   "install":   "present"
   "uninstall": "absent"
 package_state: "{{ package_states[lifecycle] | default('present') }}"
+
+package_template_dir: "{{ ansible_env.HOME }}"
