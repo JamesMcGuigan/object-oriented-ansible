@@ -1,0 +1,8 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : import vars"
+  include_vars:
+    file: "{{ item }}"
+  with_fileglob:
+    - "{{ role_path }}/vars/{{ role_class }}.yml"
+    - "{{ role_path }}/vars/{{ role_class }}/*.yml"
+    - "{{ deploy_config_vars }}/*.yml"

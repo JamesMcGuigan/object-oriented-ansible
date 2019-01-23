@@ -1,0 +1,25 @@
+---
+deploy_config_root:      "{{ inventory_dir }}/deploy_config"
+deploy_config_class:     "{{ deploy_config_root }}/{{ role_class }}"
+deploy_config_vars:      "{{ deploy_config_class }}/vars"
+deploy_config_templates: "{{ deploy_config_class }}/templates"
+deploy_config_meta:      "{{ deploy_config_class }}/meta"
+
+deploy_directory_home: "{{ ansible_env.HOME }}"
+deploy_directories:
+  home:       "{{ deploy_directory_home }}"
+  logs:       "{{ deploy_directory_home }}/logs"
+  pid:        "{{ deploy_directory_home }}/pid"
+  download:   "{{ deploy_directory_home }}/download"
+  class:      "{{ deploy_directory_home }}/{{ role_class }}"
+  install:    "{{ deploy_directory_home }}/{{ role_class }}/{{ deploy_subdirectory }}"
+
+deploy:
+  url:      false
+  subclass: false
+  buildchain: [ ]
+  keep:     3
+
+lifecycle: "install"
+
+

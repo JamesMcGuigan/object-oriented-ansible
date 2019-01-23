@@ -1,0 +1,47 @@
+---
+# Use {{ file_basename }}.yml to override step
+# Use {{ file_basename }}+pretask.yml  to prepend tasks to step
+# Use {{ file_basename }}-posttask.yml to append  tasks to step
+
+- set_fact:
+    file_basename: "{{ file | regex_replace('.yml', '') }}" 
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : import pre-tasks : {{ file_basename }}"
+  include_tasks: "{{ task_file }}"
+  loop_control:
+    loop_var: task_file
+  with_fileglob:
+  - "{{ deploy_config_templates }}/{{ deploy.subclass }}/{{ file_basename }}+pre*.yml"
+  - "{{ deploy_config_templates }}/{{ file_basename }}+pre*.yml"
+  - "{{ role_class }}/{{ deploy.subclass }}/{{ file_basename }}+pre*.yml"
+  - "{{ role_class }}/{{ file_basename }}+pre*.yml"
+  - "{{ deploy.subclass }}/{{ file_basename }}+pre*.yml"
+  - "{{ file_basename }}+pre*.yml"
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : import tasks : {{ file_basename }}"
+  include_tasks: "{{ task_file }}"
+  loop_control:
+    loop_var: task_file
+  with_first_found:
+  - "{{ deploy_config_templates }}/{{ deploy.subclass }}/{{ file }}"
+  - "{{ deploy_config_templates }}/{{ file }}"
+  - "{{ role_class }}/{{ deploy.subclass }}/{{ file }}"
+  - "{{ role_class }}/{{ file }}"
+  - "{{ deploy.subclass }}/{{ file }}"
+  - "{{ file }}"
+#  args:
+#    warn: false # set warn=false to prevent warning
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : import post-tasks : {{ file_basename }}"
+  include_tasks: "{{ task_file }}"
+  loop_control:
+    loop_var: task_file
+  with_fileglob:
+  - "{{ deploy_config_templates }}/{{ deploy.subclass }}/{{ file_basename }}-post*.yml"
+  - "{{ deploy_config_templates }}/{{ file_basename }}-post*.yml"
+  - "{{ role_class }}/{{ deploy.subclass }}/{{ file_basename }}-post*.yml"
+  - "{{ role_class }}/{{ file_basename }}-post*.yml"
+  - "{{ deploy.subclass }}/{{ file_basename }}-post*.yml"
+  - "{{ file_basename }}-post*.yml"
+#  args:
+#    warn: false # set warn=false to prevent warning

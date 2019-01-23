@@ -1,0 +1,8 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : Ensure root directories exist"
+  file:
+    path:  "{{ item.value }}"
+    state: directory
+  with_dict:
+    - "{{ deploy_directories  }}"
+

@@ -1,1 +1,8 @@
 ---
+- debug:
+    msg: "role : package : {{ role_class }} : {{ lifecycle }}"
+
+- include_tasks: 0_file.yml file=0_vars.yml
+- include_tasks: 0_file.yml file=0_autodetect_subdirectory.yml
+- include_tasks: 0_file.yml file=0_assertions.yml
+- include_tasks: 0_file.yml file=1_directories.yml

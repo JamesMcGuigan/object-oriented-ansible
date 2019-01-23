@@ -1,0 +1,3 @@
+---
+- set_fact:
+    deploy_subdirectory: "{{ deploy.url | basename | regex_replace('\.*$', '') }}"

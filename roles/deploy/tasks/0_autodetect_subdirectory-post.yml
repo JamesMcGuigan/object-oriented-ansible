@@ -1,0 +1,4 @@
+---
+- debug: var=deploy.url
+- debug: var=deploy.version
+- debug: var=deploy_subdirectory
