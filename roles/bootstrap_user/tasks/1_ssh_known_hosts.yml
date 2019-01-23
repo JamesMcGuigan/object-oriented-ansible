@@ -1,0 +1,9 @@
+---
+- name: "add domains to ~/.ssh/known_hosts"
+  shell: "ssh-keyscan '{{ item }}' | tee -a ~/.ssh/known_hosts"
+  with_items:
+    - github.com
+
+- name: "sort unique ~/.ssh/known_hosts"
+  shell: "sort -u ~/.ssh/known_hosts -o ~/.ssh/known_hosts"
+
