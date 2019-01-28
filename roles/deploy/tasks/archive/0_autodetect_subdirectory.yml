@@ -1,3 +1,4 @@
 ---
-- set_fact:
+- name: "{{ role_class }} : {{ deploy.subclass }} : autodetect deploy_subdirectory"
+  set_fact:
     deploy_subdirectory: "{{ deploy.url | basename | regex_replace('\.*$', '') }}"

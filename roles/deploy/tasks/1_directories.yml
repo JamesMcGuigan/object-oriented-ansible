@@ -1,8 +1,13 @@
 ---
-- name: "{{ role_class }} : {{ deploy.subclass }} : Ensure root directories exist"
+- name: "{{ role_class }} : {{ deploy.subclass }} : create directories"
   file:
     path:  "{{ item.value }}"
     state: directory
   with_dict:
-    - "{{ deploy_directories  }}"
+    - "{{ deploy_directories }}"
 
+- name: "{{ role_class }} : {{ deploy.subclass }} : symlink extract"
+  file:
+    src:   "{{ deploy_symlinks.extract }}"
+    dest:  "{{ deploy_directories.deploy_root }}/extract"
+    state: link

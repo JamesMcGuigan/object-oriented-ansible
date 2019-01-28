@@ -1,0 +1,11 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : s/npm/yarn/ package.json"
+  replace:
+    path:    "{{ deploy_symlinks.extract }}/package.json"
+    regexp:  "\b(npm)\b"
+    replace: "yarn"
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : yarn install --non-interactive --pure-lockfile"
+  command: yarn install --non-interactive --pure-lockfile
+  args:
+    chdir: "{{ deploy_symlinks.extract }}"

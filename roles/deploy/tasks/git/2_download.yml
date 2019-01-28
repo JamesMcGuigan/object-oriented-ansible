@@ -1,0 +1,9 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : download git repo"
+  git:
+    repo:      "{{ deploy.url }}"
+    dest:      "{{ deploy_symlinks.extract }}"
+    version:   "{{ deploy.version | default('HEAD') }}"
+    force:     yes
+    clone:     yes
+    recursive: yes

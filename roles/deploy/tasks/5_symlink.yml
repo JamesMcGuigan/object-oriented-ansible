@@ -1,0 +1,6 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : symlink current"
+  file:
+    src:   "{{ deploy_symlinks.current }}"
+    dest:  "{{ deploy_directories.deploy_root }}/current"
+    state: link

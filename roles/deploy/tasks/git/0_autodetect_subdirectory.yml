@@ -1,10 +1,10 @@
 ---
-- git:
+- name: "{{ role_class }} : {{ deploy.subclass }} : autodetect deploy_subdirectory"
+  git:
     repo:    "{{ deploy.url }}"
     clone:   no
     update:  no
     version: "{{ deploy.version | default('HEAD') }}"
   register: register_git_repo
-
 - set_fact:
     deploy_subdirectory: "{{ register_git_repo.after }}"

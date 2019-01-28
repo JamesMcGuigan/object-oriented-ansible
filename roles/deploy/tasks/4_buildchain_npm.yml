@@ -1,0 +1,18 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : stat package-lock.json"
+  stat:
+    path: "{{ deploy_symlinks.extract }}/package-lock.json"
+  register: stat_package_lock_json
+
+- debug: var=stat_package_lock_json
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : npm install package.json" 
+  npm:
+    path: "{{ deploy_symlinks.extract }}"
+  when: stat_package_lock_json.stat.exists == false
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : npm ci package.json"
+  command: npm ci
+  args:
+    chdir: "{{ deploy_symlinks.extract }}"
+  when: stat_package_lock_json.exists

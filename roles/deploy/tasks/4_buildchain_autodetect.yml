@@ -1,0 +1,39 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : stat package.json"
+  stat:
+    path: "{{ deploy_symlinks.extract }}/package.json"
+  register: stat_package_json
+
+- block:
+  - name: "{{ role_class }} : {{ deploy.subclass }} : stat package-lock.json"
+    stat:
+      path: "{{ deploy_symlinks.extract }}/package-lock.json"
+    register: stat_package_lock_json
+
+  - name: "{{ role_class }} : {{ deploy.subclass }} : stat yarn.lock"
+    stat:
+      path: "{{ deploy_symlinks.extract }}/yarn.lock"
+    register: stat_yarn_lock
+
+  - set_fact:
+      _deploy_buildchain_package_json: yarn  # default
+
+  - set_fact:
+      _deploy_buildchain_package_json: npm
+    when: stat_package_lock_json.stat.exists
+
+  - set_fact:
+      _deploy_buildchain_package_json: yarn
+    when: stat_package_lock_json.stat.exists
+
+  - set_fact:
+    _deploy_buildchain: "{{ _deploy.buildchain | default([]) + _deploy_buildchain_package_json }}"
+
+  when: stat_package_json.stat.exists
+
+
+- set_fact:
+    _deploy:
+      buildchain: _deploy_buildchain | default([])
+- set_fact:
+    deploy: "{{ deploy | combine( _deploy ) }}"

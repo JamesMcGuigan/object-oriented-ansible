@@ -1,0 +1,13 @@
+---
+- debug: var=deploy.buildchain
+- include_tasks: 0_file.yml file="4_buildchain_autodetect.yml"
+  when: (deploy.buildchain != false) and (deploy.buildchain | length == 0)
+
+- name: "{{ role_class }} : {{ deploy.subclass }} : include buildchain"
+  include_tasks: 0_file.yml file="4_buildchain_{{ item }}.yml"
+  with_items:
+    - "{{ deploy.buildchain }}"
+  when: (deploy.buildchain != false)
+
+- debug: var=deploy.buildchain
+- fail:

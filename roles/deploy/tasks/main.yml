@@ -6,3 +6,7 @@
 - include_tasks: 0_file.yml file=0_autodetect_subdirectory.yml
 - include_tasks: 0_file.yml file=0_assertions.yml
 - include_tasks: 0_file.yml file=1_directories.yml
+- include_tasks: 0_file.yml file=2_download.yml
+- include_tasks: 0_file.yml file=3_extract.yml
+- include_tasks: 0_file.yml file=4_buildchain.yml
+- include_tasks: 0_file.yml file=5_symlink.yml

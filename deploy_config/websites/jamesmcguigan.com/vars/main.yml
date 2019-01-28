@@ -2,4 +2,4 @@
 deploy:
   url:        https://github.com/JamesMcGuigan/jamesmcguigan.com.git  # need to use https rather than git@ssh
   subclass:   git
-  buildchain: [ "npm", "jekyll", "webpack" ]
+  buildchain: [ "yarn" ] #  "jekyll", "webpack" ]
