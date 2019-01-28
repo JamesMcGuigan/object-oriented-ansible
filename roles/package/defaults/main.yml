@@ -4,8 +4,12 @@ lifecycle: "install"
 
 # Implicit Variables
 package_pkg_name: #[ansible_pkg_mgr]
-  apt: "{{ role_class }}"
-  yum: "{{ role_class }}"
+  apt: [ "{{ role_class }}" ]
+  yum: [ "{{ role_class }}" ]
+  npm: [ "{{ role_class }}" ]
+  pip: [ "{{ role_class }}" ]
+
+role_subclass: ""
 
 package_states:
   "install":   "present"

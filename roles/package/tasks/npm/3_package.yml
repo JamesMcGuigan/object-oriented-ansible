@@ -1,0 +1,11 @@
+---
+# BUG: ansible npm module fails on ubuntu
+- name:    "{{ role_class }} : {{ deploy.subclass }} : npm install -g"
+  become:  true
+  command: "npm install -g {{ item }}@{{ version | default('latest') }}"
+#  npm:
+#    name:   "{{ package_pkg_name.npm }}"
+#    global: yes
+#    state:  ""
+  with_items:
+    - "{{ package_pkg_name.npm }}"

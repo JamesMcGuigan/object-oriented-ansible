@@ -1,0 +1,5 @@
+---
+package_pkg_name: #[ansible_pkg_mgr]
+  apt: [ "nodejs", "npm" ]
+  yum: "nodejs"
+

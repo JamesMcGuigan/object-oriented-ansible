@@ -1,5 +1,7 @@
 ---
 - hosts: all
   roles:
-    - { "role": "package", "role_class": "git",   tags: "git"   }
-    - { "role": "package", "role_class": "nginx", tags: "nginx" }
+    - { "role": "package", "role_class": "git",    tags: "git"    }
+    - { "role": "package", "role_class": "nodejs", tags: "nodejs" }
+    - { "role": "package", "role_class": "yarn",   tags: "yarn"   }
+    - { "role": "package", "role_class": "nginx",  tags: "nginx"  }

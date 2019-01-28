@@ -2,5 +2,7 @@
 - name:   package install
   become: true
   package:
-    name:   "{{ package_pkg_name[ansible_pkg_mgr] }}"
+    name:   "{{ item }}"
     state:  present
+  with_items:
+    - "{{ package_pkg_name[ansible_pkg_mgr] }}"

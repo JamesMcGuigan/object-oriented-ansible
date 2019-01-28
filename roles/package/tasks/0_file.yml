@@ -3,5 +3,6 @@
   loop_control:
     loop_var: task_file
   with_first_found:
-    - "{{ role_class }}/{{ file }}"
+    - "{{ role_class }}/{{ ansible_pkg_mgr }}/{{ file }}"
+    - "{{ ansible_pkg_mgr }}/{{ file }}"
     - "{{ file }}"

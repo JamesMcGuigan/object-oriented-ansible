@@ -1,0 +1,6 @@
+---
+- name: "{{ role_class }} : {{ deploy.subclass }} : assertions"
+  assert:
+    that:
+      - role_class   is defined
+      - lifecycle    in [ "install", "uninstall", "start", "stop", "restart" ]

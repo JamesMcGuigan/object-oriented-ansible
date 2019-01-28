@@ -1,6 +1,4 @@
 ---
-#package_service_name: "git"
-#
 #package_pkg_name: #[ansible_pkg_mgr]
 #  apt: "git"
 #  yum: "git"
